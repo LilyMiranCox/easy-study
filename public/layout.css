@@ -1,60 +1,58 @@
 html {
-  height:100%;
-  background-color:#f8f6f6;
+  height: 100%;
+  background-color: #f8f6f6;
 }
 
-.top-row {
-}
 .row-topic {
-  padding:10px;
-  font-family:monospace;
-  text-align:left;
-  padding-left:17px;
+  padding: 10px;
+  font-size:14px;
+  text-align: left;
+  padding-left: 17px;
 }
  .row-element {
-   padding:10px;
+   padding: 10px;
  }
  .row-element-container {
-   background-color:#f8f9fa;
+   background-color: #f8f9fa;
    border: 1px solid #e8e9e9;
    border-right: none;
    width: 350px;
-   font-family: monospace;
-   height:100%;
-   cursor:text;
+   height: 100%;
+   cursor: text;
+   font-size: 14px;
  }
 .empty {
-  background-color:#e7eaec;
+  background-color: #e7eaec;
   border: 1px solid #dddfe0;
 }
 .topic-container {
-  background-color:#d1dbe0;
+  background-color: #d1dbe0;
   border: 1px solid #c7d2d7;
-  position:relative;
-  left:1px;
-  width:125px;
-  z-index:10;
+  position: relative;
+  left: 1px;
+  width: 125px;
+  z-index: 10;
 }
 th {
-  border-left:none !important;
+  border-left: none !important;
 }
 .table-container {
   border-collapse: collapse;
 }
 .language-container {
-  background-color:#d1dbe0;
+  background-color: #d1dbe0;
   border: 1px solid #bfc5c7;
 }
 .table-container {
   overflow-x: auto;
-  width:inherit;
+  width: inherit;
 }
 .element-lines {
-  display:flex;
+  display: flex;
 }
 
 .lang-selector {
-  font-family:monospace;
+  font-size:14px;
   display:inline-block;
   width:160px;
   padding:10px;
@@ -140,26 +138,6 @@ td {
   border-radius: 50%;
 }
 
-.headcol {
-  position: absolute;
-  width: 5em;
-  left: 0;
-  top: auto;
-  border-top-width: 1px;
-  /*only relevant for first row*/
-  margin-top: -1px;
-  /*compensate for top border*/
-}
-/*.ck.ck-content {
-  padding:10px !important;
-  padding-left:15px !important;
-  height:-webkit-fill-available;
-}*/
-
-/*input:checked {
-  background-color:red;
-}*/
-
 .check-select {
   display: block;
   position: relative;
@@ -177,10 +155,10 @@ td {
 
 .check-select input {
   position: absolute;
-opacity: 0;
-cursor: pointer;
-height: 0;
-width: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
 }
 
 .checkmark {
@@ -228,7 +206,7 @@ width: 0;
 }
 
 .row-title-sub {
-  
+
 }
 
 .rotate-90 {
@@ -255,8 +233,8 @@ width: 0;
   background-color: #a0bf70;
   color: #f6f6f6;
   font-weight: 600;
-  width:70px;
-  cursor:pointer;
+  width: 70px;
+  cursor: pointer;
 }
 
 .admin-panel {
@@ -268,5 +246,5 @@ width: 0;
   padding: 10px;
   border-radius: 5px 5px 0px 0px;
   margin-left: -10px;
-  margin-top:-10px;
+  margin-top: -10px;
 }

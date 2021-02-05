@@ -66,7 +66,7 @@ class AdvText extends Component {
                       } }
                   />
               </div>
-            </div>
+          </div>
         );
     }
 }

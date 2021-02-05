@@ -2,7 +2,45 @@ import React from 'react';
 import AdvText from './AdvText';
 
 class Table extends React.Component {
-  tableHeader() {
+  constructor() {
+    super();
+
+    this.handleAddColumn = this.handleAddColumn.bind(this);
+    this.handleAddRow = this.handleAddRow.bind(this);
+  }
+
+  handleBodyChange(column, row, id, text) {
+    this.adjustRowTitle(row);
+
+    let body = JSON.parse(JSON.stringify(this.props.body));
+
+    if(text == "") {
+      delete body[column].notes[row];
+    }
+    else {
+      body[column].notes[row] = text;
+    }
+
+    this.props.handleBodyChange(body);
+  }
+
+  adjustRowTitle(row) {
+    let table_body = document.getElementById(row);
+    let table_topic = document.getElementById(row+"t");
+    let table_size = table_body.getBoundingClientRect();
+
+    table_topic.style.height = (table_size.height-2)+"px";
+  }
+
+  handleAddColumn() {
+    this.props.addColumn();
+  }
+
+  handleAddRow() {
+    this.props.addRow();
+  }
+
+  renderTableHeader() {
     var columns = this.props.columns;
     var row = [];
 
@@ -20,42 +58,11 @@ class Table extends React.Component {
       );
     }
 
-    return <tr className="top-row">{row}</tr>;
-  }
-
-  adjustRowTitle(row) {
-    let table_body = document.getElementById(row);
-    let table_topic = document.getElementById(row+"t");
-    let table_size = table_body.getBoundingClientRect();
-
-    table_topic.style.height = (table_size.height-2)+"px";
-  }
-
-  handleBodyChange = (column, row, id, text) => {
-    this.adjustRowTitle(row);
-
-    let body = JSON.parse(JSON.stringify(this.props.body));
-    if(text == "") {
-      delete body[column].notes[row];
-    }
-    else {
-      body[column].notes[row] = text;
-    }
-    this.props.handleBodyChange(body);
-  }
-
-  handleAddColumn() {
-    console.log("Add a column!");
-    this.props.addColumn();
-  }
-
-  handleAddRow() {
-    console.log("Add a row!");
-    this.props.addRow();
+    return <tr>{row}</tr>;
   }
 
   render() {
-    var columns = this.props.columns;/*Object.keys(this.state.languages);*/
+    var columns = this.props.columns;
     var rows = this.props.rows;
     var table = [];
 
@@ -63,11 +70,12 @@ class Table extends React.Component {
       var row = [];
       var addCol = "";
       var addRow = "";
+
       if(this.props.editable) {
         addCol = (
           <button
             className="row-topic add-btn"
-            onClick={this.handleAddColumn.bind(this)}
+            onClick={this.handleAddColumn()}
             style={{
               position: "relative",
               left: "26px",
@@ -80,7 +88,7 @@ class Table extends React.Component {
         addRow = (
           <button
             className="row-topic add-btn rotate-90"
-            onClick={this.handleAddRow.bind(this)}
+            onClick={this.handleAddRow()}
             style={{
               position: "relative",
               top: "12px",
@@ -91,10 +99,11 @@ class Table extends React.Component {
           </button>
         );
       }
+
       var row_labels = [
         <div className="topic-container"
             style={{
-              height:63,
+              height:67.5,
               backgroundColor:"#c6d2d7"
             }}
         >
@@ -108,11 +117,15 @@ class Table extends React.Component {
 
         for(var c = 0; c < columns.length; ++c) {
           var id = rows[r]+columns[c];
-          let className = (this.props.body[columns[c]].notes.hasOwnProperty(rows[r])?"":"empty")
+          let className = (this.props.body[columns[c]].notes.hasOwnProperty(rows[r])?"":"empty");
+
           row.push(
                 <td>
                   <AdvText
-                    data={(this.props.body[columns[c]].notes.hasOwnProperty(rows[r]))?this.props.body[columns[c]].notes[rows[r]]:""}
+                    data={(this.props.body[columns[c]].notes.hasOwnProperty(rows[r]))
+                          ?this.props.body[columns[c]].notes[rows[r]]
+                          :""
+                        }
                     onReady={this.adjustRowTitle.bind(this, rows[r])}
                     onChange={this.handleBodyChange.bind(this, columns[c], rows[r], id)}
                     id={id}
@@ -143,19 +156,14 @@ class Table extends React.Component {
             className="table-row"
             key={r+"r"}
           >
-            {row}
+              {row}
           </tr>
         );
       }
     }
 
     return (
-        <div
-          className=""
-          style={{
-            display:"flex"
-          }}
-        >
+        <div className="" style={{ display:"flex" }} >
             <div>
               {row_labels}
             </div>
@@ -163,7 +171,7 @@ class Table extends React.Component {
             <div className="table-display">
                 <table className="table-container">
                     <thead>
-                      {this.tableHeader()}
+                      {this.renderTableHeader()}
                     </thead>
 
                     <tbody>
